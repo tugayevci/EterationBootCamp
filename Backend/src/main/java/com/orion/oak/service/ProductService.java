@@ -1,9 +1,13 @@
 package com.orion.oak.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.orion.oak.model.Product;
@@ -20,10 +24,9 @@ public class ProductService {
 		return productRepository.findById(id).get();
 	}
 	public List<Product>  getProducts(){
-		
-	
-		
-		return productRepository.findAll();
+		List allProducts = productRepository.findAll();
+		Collections.reverse(allProducts);
+		return allProducts;
 		
 	}
 	public Product addProduct(Product product) {
@@ -46,4 +49,17 @@ public class ProductService {
 		return productRepository.findByNameAndDescription(name, description);
 	}
 
+	public List<Product>  getProductsByCategoryId(int categoryId){
+		
+		return productRepository.getProductsByCategoryId(categoryId);
+		
+	}
+
+	
+	public List<Product> findTop10ByproductIdOrderByDescproductId() {
+		// TODO Auto-generated method stub
+		
+		return productRepository.findAll();
+	}
+	
 }

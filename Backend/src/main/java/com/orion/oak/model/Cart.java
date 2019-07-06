@@ -1,11 +1,14 @@
 package com.orion.oak.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 @Entity
 public class Cart {
@@ -14,14 +17,10 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cartId;
 	
-	@Transient
-	private List<Product> selectedProducts;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Product> selectedProducts = new ArrayList<Product>();;
 	
-	
-	public double getTotalPrice() {
-		return 0.0;
-	}
-	
+
 	public int getCartId() {
 		return cartId;
 	}

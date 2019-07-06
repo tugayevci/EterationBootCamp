@@ -17,14 +17,13 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int productId;
-	private String productyName;
+	private String productName;
 	@Column(length = 300,name = "DESCR")
 	private String productDescription;
 	private double productPrice;
 	private String productImagePath;
 	
 	@ManyToOne
-	@JsonIgnore
 	private Category productCategory;
 	
 	public int getProductId() {
@@ -33,11 +32,12 @@ public class Product {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-	public String getProductyName() {
-		return productyName;
+
+	public String getProductName() {
+		return productName;
 	}
-	public void setProductyName(String productyName) {
-		this.productyName = productyName;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 	public String getProductDescription() {
 		return productDescription;
@@ -72,7 +72,7 @@ public class Product {
 		result = prime * result + productId;
 		result = prime * result + ((productImagePath == null) ? 0 : productImagePath.hashCode());
 		result = prime * result + productPrice;
-		result = prime * result + ((productyName == null) ? 0 : productyName.hashCode());
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		return (int)result;
 	}
 	
@@ -105,16 +105,16 @@ public class Product {
 			return false;
 		if (productPrice != other.productPrice)
 			return false;
-		if (productyName == null) {
-			if (other.productyName != null)
+		if (productName == null) {
+			if (other.productName != null)
 				return false;
-		} else if (!productyName.equals(other.productyName))
+		} else if (!productName.equals(other.productName))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", productyName=" + productyName + ", productDescription="
+		return "Product [productId=" + productId + ", productyName=" + productName + ", productDescription="
 				+ productDescription + ", productPrice=" + productPrice + ", productImagePath=" + productImagePath
 				+ ", productCategory=" + productCategory + "]";
 	}

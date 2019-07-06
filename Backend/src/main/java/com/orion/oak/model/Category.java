@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Category {
 	@Id
@@ -18,6 +20,7 @@ public class Category {
 	private String categoryName;
 	private String categoryDescription;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "productCategory",cascade = CascadeType.ALL)
 	private List<Product> categoryProducts = new ArrayList<Product>();
 	

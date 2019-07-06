@@ -3,6 +3,7 @@ package com.orion.oak.resource;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.orion.oak.model.Product;
 import com.orion.oak.service.ProductService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/products")
 public class ProductResources {
 	
@@ -33,6 +35,7 @@ public class ProductResources {
 		return addProduct;
 	}
 	
+
 	@RequestMapping(value="/{id}" , method = RequestMethod.DELETE)
 	public void deleteProduct(@PathVariable int id) {
 		 productService.deleteProduct(id);
@@ -46,5 +49,19 @@ public class ProductResources {
 	public List<Product> getProductNameDescription(@PathVariable String name,@PathVariable String description) {
 		return productService.findByQuery(name,description);
 	}
+	
+	@RequestMapping(value="/category/{id}", method = RequestMethod.GET)
+	public List<Product> getProductsCategory(@PathVariable int id){
+		return productService.getProductsByCategoryId(id);
+	}
+	
+	
+	@RequestMapping(value="/last10", method = RequestMethod.GET)
+	public List<Product> findTop10OrderByproductIdDesc(){
+		return productService.findTop10ByproductIdOrderByDescproductId();
+	}
+	
+	
+	
 	
 }
